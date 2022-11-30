@@ -42,8 +42,8 @@ vm_disk_thin_provisioned = true
 vm_network_card          = "vmxnet3"
 
 // Removable Media Settings
-iso_path           = "iso/windows"
-iso_file           = "windows_server_2019.iso"
+iso_path           = "_ISOs/Windows"
+iso_file           = "en-us_windows_server_2019_updated_aug_2021_x64_dvd_a6431a28.iso"
 iso_checksum_type  = "sha256"
 iso_checksum_value = "0067AFE7FDC4E61F677BD8C35A209082AA917DF9C117527FC4B2B52A447E89BB"
 
