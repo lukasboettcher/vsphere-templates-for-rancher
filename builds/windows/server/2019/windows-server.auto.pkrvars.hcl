@@ -69,7 +69,7 @@ iso_checksum_value = "6dae072e7f78f4ccab74a45341de0d6e2d45c39be25f1f5920a2ab4f51
 vm_boot_order       = "disk,cdrom"
 vm_boot_wait        = "2s"
 vm_boot_command     = ["<spacebar>"]
-vm_shutdown_command = "shutdown /s /t 10 /f /d p:4:1 /c \"Shutdown by Packer\""
+vm_shutdown_command = "C:\\Windows\\system32\\Sysprep\\sysprep.exe /generalize /shutdown"
 
 // Communicator Settings
 communicator_port    = 5985
