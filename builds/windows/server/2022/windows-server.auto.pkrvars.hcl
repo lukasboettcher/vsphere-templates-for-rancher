@@ -70,7 +70,7 @@ iso_checksum_value = "5140AC5FB8F48EFDF4BFCF1E7BE14030F9164A824F12A9D08A45CDC72D
 vm_boot_order       = "disk,cdrom"
 vm_boot_wait        = "2s"
 vm_boot_command     = ["<spacebar>"]
-vm_shutdown_command = "C:\\Windows\\system32\\Sysprep\\sysprep.exe /generalize /shutdown"
+vm_shutdown_command = "C:\\Windows\\system32\\sysprep\\sysprep.exe /unattend:A:\\autounattend.xml /quiet /generalize /oobe /shutdown"
 
 // Communicator Settings
 communicator_port    = 5985
