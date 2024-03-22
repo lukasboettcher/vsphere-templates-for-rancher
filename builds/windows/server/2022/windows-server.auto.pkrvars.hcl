@@ -37,7 +37,9 @@ vm_guest_os_experience_core    = "core"
 vm_guest_os_experience_desktop = "dexp"
 
 // Virtual Machine Guest Operating System Setting
-vm_guest_os_type = "windows2019srv_64Guest"
+// Note that for 2022 servers the OS type still specifies 2019,
+// but uses the 'next' keyword to indicate 2022.
+vm_guest_os_type = "windows2019srvNext_64Guest"
 
 // Virtual Machine Hardware Settings
 vm_firmware              = "efi-secure"
@@ -49,7 +51,7 @@ vm_cdrom_type            = "sata"
 vm_cpu_sockets           = 2
 vm_cpu_cores             = 1
 vm_cpu_hot_add           = false
-vm_mem_size              = 8192
+vm_mem_size              = 12288
 vm_mem_hot_add           = false
 vm_disk_size             = 40000
 vm_disk_controller_type  = ["pvscsi"]
@@ -61,8 +63,8 @@ vm_network_card          = "vmxnet3"
 // to the current vSphere environment,
 // and should changed when ISOs are uploaded
 // or removed
-iso_path           = "iso"
-iso_file           = "windows-2022.iso"
+iso_path           = "ISOs/Windows/"
+iso_file           = "windows2022.iso"
 iso_checksum_type  = "sha256"
 iso_checksum_value = "5140AC5FB8F48EFDF4BFCF1E7BE14030F9164A824F12A9D08A45CDC72DAC8D15"
 
@@ -70,13 +72,12 @@ iso_checksum_value = "5140AC5FB8F48EFDF4BFCF1E7BE14030F9164A824F12A9D08A45CDC72D
 vm_boot_order       = "disk,cdrom"
 vm_boot_wait        = "2s"
 vm_boot_command     = ["<spacebar>"]
-vm_shutdown_command = "C:\\Windows\\system32\\sysprep\\sysprep.exe /unattend:A:\\autounattend.xml /quiet /generalize /oobe /shutdown"
+vm_shutdown_command = "C:\\Windows\\system32\\Sysprep\\sysprep.exe /generalize /shutdown /oobe /mode:vm /unattend:C:\\autounattend.xml"
 
 // Communicator Settings
 communicator_port    = 5985
 communicator_timeout = "12h"
 
 // Provisioner Settings
-preparationScripts = ["scripts/windows/windows-prepare.ps1"]
+preparationScripts = ["scripts/windows/windows-prepare.ps1", "scripts/windows/windows-setup-cloudbase-unattend.ps1"]
 finishScripts = ["scripts/windows/windows-finish.ps1"]
-
