@@ -215,7 +215,9 @@ The files are distributed in the following directories.
 
     **Microsoft Windows**
     * Microsoft Windows Server 2022
+      * [Download](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019) the latest Evaluation edition of Windows Server 2019
     * Microsoft Windows Server 2019
+      * [Download](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022) the latest Evaluation edition of Windows server 2022
 
 3. Obtain the checksum type (_e.g._ `sha256`, `md5`, etc.) and checksum value for each guest operating system `.iso` image from the vendor. This will be use in the build input variables.
 
@@ -571,9 +573,9 @@ Username and password variables are passed into the kickstart or cloud-init file
 
 #### Microsoft Windows Unattended amd Scripts
 
-Variables are passed into the [Microsoft Windows][microsoft-windows-unattend] unattend files (`autounattend.xml`) as Packer template files (`autounattend.pkrtpl.hcl`) to generate these on-demand. A PowerShell script is then used to configure the Linux machine image builds.
+Variables are passed into the [Microsoft Windows][microsoft-windows-unattend] unattend files (`autounattend.xml`) as Packer template files (`autounattend.pkrtpl.hcl`) to generate these on-demand. Unattend files are used to automatically configure Windows on initial bootup. This includes setting up user profiles, defining the language and timezone, and many other options that would normally be configured in the Windows UI on initial boot of the OS. 
 
-By default, each unattended file is set to use the [KMS client setup keys][microsoft-kms] as the **Product Key**.
+By default, each unattended file is set to use the [KMS client setup keys][microsoft-kms] as the **Product Key**. If you are using an Evaluation edition of Windows server, a valid product key is not required. 
 
 **Need help customizing the configuration files?**
 
@@ -587,6 +589,7 @@ By default, each unattended file is set to use the [KMS client setup keys][micro
     ```
 * **Red Hat Enterprise Linux** (_as well as CentOS Linux/Stream, AlmaLinux OS, and Rocky Linux_) - Use the [Red Hat Kickstart Generator][redhat-kickstart].
 * **Microsoft Windows** - Use the Microsoft Windows [Answer File Generator][microsoft-windows-afg] if you need to customize the provided examples further.
+  * Additionally, refer to the CloudBase Init documentation on specifics relating to how each VM created from a Windows template is personalized and made unique.   
 
 ### Step 6 - Add Certificates
 
@@ -692,7 +695,7 @@ Happy building!!!
 [packer-variables]: https://www.packer.io/docs/templates/hcl_templates/variables
 [photon-kickstart]: https://vmware.github.io/photon/docs/user-guide/kickstart-through-http/packer-template/
 [redhat-kickstart]: https://access.redhat.com/labs/kickstartconfig/
-[ssh-keygen]: https://www.ssh.com/ssh/keygen/
+[ssh-keygen]:https://www.ssh.com/ssh/keygen/
 [terraform-install]: https://www.terraform.io/docs/cli/install/apt.html
 [vmware-pvscsi]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.hostclient.doc/GUID-7A595885-3EA5-4F18-A6E7-5952BFC341CC.html
 [vmware-vmxnet3]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-AF9E24A8-2CFA-447B-AC83-35D563119667.html

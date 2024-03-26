@@ -23,6 +23,9 @@ Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlo
 Write-Output "Installing cloudbase-init..."
 choco install cloudbaseinit
 
+# Create the cloudbase init configuration which will run on startup.
+# Note that, in order for the vSphere CPI to function properly netbios_host_name_compatibility must be set to false.
+# Additionally, allow_reboot must be set to true in order for the SetHostNamePlugin to work as expected.
 Set-Content -Path "C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf\cloudbase-init.conf" -value @"
 [DEFAULT]
 username=rancher
@@ -43,6 +46,7 @@ mtu_use_dhcp_config=true
 ntp_use_dhcp_config=true
 local_scripts_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\LocalScripts\
 metadata_services=cloudbaseinit.metadata.services.nocloudservice.NoCloudConfigDriveService
+netbios_host_name_compatibility=false
 plugins=cloudbaseinit.plugins.common.mtu.MTUPlugin,
         cloudbaseinit.plugins.common.userdata.UserDataPlugin,
         cloudbaseinit.plugins.common.sethostname.SetHostNamePlugin,
@@ -52,7 +56,7 @@ plugins=cloudbaseinit.plugins.common.mtu.MTUPlugin,
         cloudbaseinit.plugins.common.networkconfig.NetworkConfigPlugin,
         cloudbaseinit.plugins.common.localscripts.LocalScriptsPlugin
 check_latest_version=true
-allow_reboot=false
+allow_reboot=true
 stop_service_on_exit=false
 [config_drive]
 types=iso,vfat

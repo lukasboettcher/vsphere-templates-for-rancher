@@ -411,13 +411,31 @@ build {
     "source.vsphere-iso.windows-server-datacenter-dexp"
   ]
 
-  #provisioner "file" {
-  #  source      = "${path.cwd}/certificates/root-ca.cer"
-  #  destination = "C:\\windows\\temp\\root-ca.cer"
-  #}
+  provisioner "file" {
+    content      = templatefile("${abspath(path.root)}/data/autounattend.pkrtpl.hcl", {
+      build_username       = var.build_username
+      build_password       = var.build_password
+      vm_inst_os_language  = var.vm_inst_os_language
+      vm_inst_os_keyboard  = var.vm_inst_os_keyboard
+      vm_inst_os_language  = var.vm_inst_os_language
+      vm_inst_os_keyboard  = var.vm_inst_os_keyboard
+      vm_inst_os_image     = var.vm_inst_os_image_datacenter_core_index
+      vm_inst_os_kms_key   = var.vm_inst_os_kms_key_datacenter
+      vm_guest_os_language = var.vm_guest_os_language
+      vm_guest_os_keyboard = var.vm_guest_os_keyboard
+      vm_guest_os_timezone = var.vm_guest_os_timezone
+    })
+    destination = "C:\\autounattend.xml"
+  }
+
   provisioner "windows-restart" {
     pause_before          = "10s"
     restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
+  }
+
+  provisioner "file" {
+    source      = "${path.cwd}/files/windows/tool.conf"
+    destination = "C:\\ProgramData\\VMware\\VMware Tools\\tools.conf"
   }
 
   provisioner "windows-update" {
@@ -457,7 +475,7 @@ build {
     scripts           = formatlist("${path.cwd}/%s", var.finishScripts)
   }
 
-/*   provisioner "windows-update" {
+  provisioner "windows-update" {
     pause_before    = "30s"
     search_criteria = "IsInstalled=0"
     filters = [
@@ -468,7 +486,7 @@ build {
       "include:$true"
     ]
     restart_timeout = "120m"
-  } */
+  }
 
   post-processor "manifest" {
     output     = "${local.manifest_path}${local.manifest_date}.json"
