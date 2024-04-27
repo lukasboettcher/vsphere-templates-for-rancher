@@ -29,7 +29,7 @@ terraform.rc
 
 # Configurations
 ## Ignore default config directory.
-config/
+# config/
 ## Ignore certificates files.
 **/*.cer
 **/*.crt
@@ -43,3 +43,4 @@ manifests/*.json
 
 # Editors
 .idea/
+sensitive.pkrvars.hcl

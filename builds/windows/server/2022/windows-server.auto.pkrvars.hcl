@@ -26,7 +26,7 @@ vm_inst_os_image_datacenter_desktop_index = 4
 
 // Guest Operating System Metadata
 vm_guest_os_language           = "en-US"
-vm_guest_os_keyboard           = "en-US"
+vm_guest_os_keyboard           = "de-DE"
 vm_guest_os_timezone           = "UTC"
 vm_guest_os_family             = "windows"
 vm_guest_os_name               = "server"
@@ -39,7 +39,8 @@ vm_guest_os_experience_desktop = "dexp"
 // Virtual Machine Guest Operating System Setting
 // Note that for 2022 servers the OS type still specifies 2019,
 // but uses the 'next' keyword to indicate 2022.
-vm_guest_os_type = "windows2019srvNext_64Guest"
+// vm_guest_os_type = "windows2019srvNext_64Guest"
+vm_guest_os_type = "windows9Server64Guest"
 
 // Virtual Machine Hardware Settings
 vm_firmware              = "efi-secure"
@@ -63,10 +64,10 @@ vm_network_card          = "vmxnet3"
 // to the current vSphere environment,
 // and should changed when ISOs are uploaded
 // or removed
-iso_path           = "ISOs/Windows/"
-iso_file           = "windows2022.iso"
+iso_path           = "isos/"
+iso_file           = "win-server-2022-SERVER_EVAL_x64FRE_en-us.iso"
 iso_checksum_type  = "sha256"
-iso_checksum_value = "5140AC5FB8F48EFDF4BFCF1E7BE14030F9164A824F12A9D08A45CDC72DAC8D15"
+iso_checksum_value = "3e4fa6d8507b554856fc9ca6079cc402df11a8b79344871669f0251535255325"
 
 // Boot Settings
 vm_boot_order       = "disk,cdrom"

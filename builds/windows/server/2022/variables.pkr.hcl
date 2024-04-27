@@ -393,20 +393,6 @@ variable "build_password" {
   sensitive   = true
 }
 
-variable "build_password_encrypted" {
-  type        = string
-  description = "The SHA-512 encrypted password to login to the guest operating system."
-  sensitive   = true
-  default     = ""
-}
-
-variable "build_key" {
-  type        = string
-  description = "The public key to login to the guest operating system."
-  sensitive   = true
-  default     = ""
-}
-
 // Communicator Credentials
 
 variable "communicator_port" {

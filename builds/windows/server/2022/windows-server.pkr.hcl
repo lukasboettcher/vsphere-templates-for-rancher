@@ -439,13 +439,13 @@ build {
     destination = "C:\\ProgramData\\VMware\\VMware Tools\\tools.conf"
   }
 
-  provisioner "windows-update" {
-    search_criteria = "IsInstalled=0"
-    filters = [
-      "exclude:$_.Title -like '*Preview*'",
-      "include:$true",
-    ]
-  }
+  //provisioner "windows-update" {
+  //  search_criteria = "IsInstalled=0"
+  //  filters = [
+  //    "exclude:$_.Title -like '*Preview*'",
+  //    "include:$true",
+  //  ]
+  //}
 
   provisioner "windows-restart" {
     pause_before          = "10s"
@@ -476,18 +476,18 @@ build {
     scripts           = formatlist("${path.cwd}/%s", var.finishScripts)
   }
 
-  provisioner "windows-update" {
-    pause_before    = "30s"
-    search_criteria = "IsInstalled=0"
-    filters = [
-      "exclude:$_.Title -like '*VMware*'",
-      "exclude:$_.Title -like '*Preview*'",
-      "exclude:$_.Title -like '*Defender*'",
-      "exclude:$_.InstallationBehavior.CanRequestUserInput",
-      "include:$true"
-    ]
-    restart_timeout = "120m"
-  }
+  //provisioner "windows-update" {
+  //  pause_before    = "30s"
+  //  search_criteria = "IsInstalled=0"
+  //  filters = [
+  //    "exclude:$_.Title -like '*VMware*'",
+  //    "exclude:$_.Title -like '*Preview*'",
+  //    "exclude:$_.Title -like '*Defender*'",
+  //    "exclude:$_.InstallationBehavior.CanRequestUserInput",
+  //    "include:$true"
+  //  ]
+  //  restart_timeout = "120m"
+  //}
 
   post-processor "manifest" {
     output     = "${local.manifest_path}${local.manifest_date}.json"
